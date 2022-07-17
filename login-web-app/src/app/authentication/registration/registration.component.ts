@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthenticationService } from '../authentication.service';
 import { Name, RegistratioRequest } from './registration-request';
 
@@ -17,7 +18,8 @@ export class RegistrationComponent implements OnInit {
   public showSuccess : boolean = false;
 
   constructor(
-    private authenticationService : AuthenticationService
+    private authenticationService : AuthenticationService,
+    private router : Router,
   ) { }
 
   ngOnInit(): void {
@@ -49,6 +51,10 @@ export class RegistrationComponent implements OnInit {
     this.registrationRequest = new RegistratioRequest();
     this.name = new Name();
 
+  }
+
+  public goToLogin(): void{
+    this.router.navigate(['/login']);
   }
 
 
