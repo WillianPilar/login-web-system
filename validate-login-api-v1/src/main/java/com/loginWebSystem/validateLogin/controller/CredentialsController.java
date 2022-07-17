@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.loginWebSystem.validateLogin.model.Credentials;
+import com.loginWebSystem.validateLogin.model.dto.LoginResponseDTO;
 import com.loginWebSystem.validateLogin.model.dto.RegistrationDTO;
 import com.loginWebSystem.validateLogin.service.CredentialsService;
 import com.loginWebSystem.validateLogin.service.impl.CredentialsServiceImpl;
@@ -68,7 +69,8 @@ public class CredentialsController {
 				}
 
 				if (credential.password.equals(password)) {
-					return ResponseEntity.ok().body("Login successfully");
+					LoginResponseDTO loginResponse = new LoginResponseDTO("Login successfully");
+					return ResponseEntity.ok().body(loginResponse);
 				}
 
 			}
