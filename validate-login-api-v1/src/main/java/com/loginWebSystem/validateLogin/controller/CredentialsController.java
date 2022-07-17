@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +22,7 @@ import com.loginWebSystem.validateLogin.service.impl.CredentialsServiceImpl;
 
 @RestController
 @RequestMapping(value = "/validate-login/api/v1")
+@CrossOrigin("http://localhost:4200")
 public class CredentialsController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(CredentialsController.class);
@@ -37,7 +39,7 @@ public class CredentialsController {
 
 			List<Credentials> credentialsByEmail = service.findByEmail(credentials.email);
 			if (!credentialsByEmail.isEmpty()) {
-				return ResponseEntity.badRequest().body("Email já está cadastrado");
+				return ResponseEntity.badRequest().body("Email is already in use");
 			}
 
 			service.save(credentials);
@@ -57,16 +59,16 @@ public class CredentialsController {
 
 			List<Credentials> credentialsByEmail = service.findByEmail(email);
 			if (credentialsByEmail.isEmpty()) {
-				return ResponseEntity.badRequest().body("Usuário não cadastrado");
+				return ResponseEntity.badRequest().body("User not registered");
 			} else {
 
 				Credentials credential = credentialsByEmail.get(0);
 				if (!credential.password.equals(password)) {
-					return ResponseEntity.badRequest().body("Senha incorreta");
+					return ResponseEntity.badRequest().body("Incorrect password");
 				}
 
 				if (credential.password.equals(password)) {
-					return ResponseEntity.ok().body("Login realizado com sucesso");
+					return ResponseEntity.ok().body("Login successfully");
 				}
 
 			}
