@@ -79,7 +79,7 @@ public class CredentialsController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
-		return ResponseEntity.badRequest().body("Erro ao realizar o login");
+		return ResponseEntity.badRequest().body("Error trying to login");
 
 	}
 
